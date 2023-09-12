@@ -29,5 +29,14 @@ class Cell:
         if self.has_top_wall:
             wall = Line(Point(self.leftX, self.bottomY), Point(self.rightX, self.bottomY))
             self.win.draw_line(wall, "black")
-        
+    
+    def draw_move(self, to_cell, undo=False):
+        start = Point(self.leftX + (self.rightX - self.leftX)//2,self.topY + (self.bottomY - self.topY)//2)
+        end = Point(to_cell.leftX + (to_cell.rightX - to_cell.leftX)//2,to_cell.topY + (to_cell.bottomY - to_cell.topY)//2)
+        path = Line(start, end)
+        if undo:
+            self.win.draw_line(path, "grey")
+        else:
+            self.win.draw_line(path, "red")
+
      
