@@ -20,8 +20,9 @@ class Maze:
         self.cell_size = cell_size
         self.win = win
 
-        self.create_cells()
-        self.break_entrance_and_exit()
+        if num_cols > 0 and num_rows > 0:
+            self.create_cells()
+            self.break_entrance_and_exit()
 
     def create_cells(self):
         for row in range(self.num_rows):
