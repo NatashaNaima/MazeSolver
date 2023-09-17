@@ -21,6 +21,7 @@ class Maze:
         self.win = win
 
         self.create_cells()
+        self.break_entrance_and_exit()
 
     def create_cells(self):
         for row in range(self.num_rows):
@@ -51,7 +52,13 @@ class Maze:
         time.sleep(0.05)
     
     def break_entrance_and_exit(self):
-        pass
+        entrance = 0,0
+        self.break_wall(entrance[0], entrance[1], 'left')
+        self.draw_cell(entrance[0], entrance[1])
+
+        exit = self.num_rows - 1, self.num_cols - 1
+        self.break_wall(exit[0], exit[1], 'right')
+        self.draw_cell(exit[0], exit[1])
 
     def break_wall(self, row, col, wall):
         cell = self.cells[row][col]
@@ -74,5 +81,4 @@ class Maze:
         if wall == 'bottom':
             cell.has_bottom_wall = False
             if row not in range(0, self.num_rows-1):
-                self.cells[row+1][col].has_top_wall = False 
-
+                self.cells[row+1][col].has_top_wall = False
