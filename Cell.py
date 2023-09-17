@@ -17,18 +17,30 @@ class Cell:
         self.bottomY = cornerY + size
         self.leftX = cornerX
         self.rightX = cornerX + size
+
+        lWall = Line(Point(self.leftX, self.topY), Point(self.leftX, self.bottomY))
         if self.has_left_wall:
-            wall = Line(Point(self.leftX, self.topY), Point(self.leftX, self.bottomY))
-            self.win.draw_line(wall, "black")
+            self.win.draw_line(lWall, "black")
+        else:
+            self.win.draw_line(lWall, "white")
+
+        rWall = Line(Point(self.rightX, self.topY), Point(self.rightX, self.bottomY))    
         if self.has_right_wall:
-            wall = Line(Point(self.rightX, self.topY), Point(self.rightX, self.bottomY))
-            self.win.draw_line(wall, "black")
+            self.win.draw_line(rWall, "black")
+        else:
+            self.win.draw_line(rWall, "white")
+
+        tWall = Line(Point(self.leftX, self.topY), Point(self.rightX, self.topY))
         if self.has_top_wall:
-            wall = Line(Point(self.leftX, self.topY), Point(self.rightX, self.topY))
-            self.win.draw_line(wall, 'black')
-        if self.has_top_wall:
-            wall = Line(Point(self.leftX, self.bottomY), Point(self.rightX, self.bottomY))
-            self.win.draw_line(wall, "black")
+            self.win.draw_line(tWall, 'black')
+        else:
+            self.win.draw_line(tWall, 'white')
+
+        bWall = Line(Point(self.leftX, self.bottomY), Point(self.rightX, self.bottomY))
+        if self.has_bottom_wall:
+            self.win.draw_line(bWall, "black")
+        else:
+            self.win.draw_line(bWall, "white")
     
     def draw_move(self, to_cell, undo=False):
         start = Point(self.leftX + (self.rightX - self.leftX)//2,self.topY + (self.bottomY - self.topY)//2)
@@ -38,5 +50,7 @@ class Cell:
             self.win.draw_line(path, "grey")
         else:
             self.win.draw_line(path, "red")
+
+    
 
      
